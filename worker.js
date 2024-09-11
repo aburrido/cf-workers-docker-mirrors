@@ -43,7 +43,7 @@ export default {
       const dockerRateLimitSource = rateLimitHeaders.get('docker-ratelimit-source');
 
       // 构建要返回的内容，包括当前请求的域名和指定内容
-      const responseText = `#ratelimit-limit: ${rateLimitLimit}\n#ratelimit-remaining: ${rateLimitRemaining}\n#docker-ratelimit-source: ${dockerRateLimitSource}\n\ntee /etc/docker/daemon.json <<-'EOF'\n{\n"registry-mirrors": [\n  "https://${currentDomain}"\n]\n}\nEOF`;
+      const responseText = `# ratelimit-limit: ${rateLimitLimit}\n# ratelimit-remaining: ${rateLimitRemaining}\n# docker-ratelimit-source: ${dockerRateLimitSource}\n\ntee /etc/docker/daemon.json <<-'EOF'\n{\n"registry-mirrors": [\n  "https://${currentDomain}"\n]\n}\nEOF`;
 
       
       return new Response(responseText, {
