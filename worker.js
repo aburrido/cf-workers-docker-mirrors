@@ -16,6 +16,15 @@ export default {
         statusText: tokenResponse.statusText,
         headers: tokenResponse.headers
       });
+    } else if (url.pathname === '/robots.txt') {
+      const robotsTxt = "User-agent: *\nDisallow: /";
+      
+      return new Response(robotsTxt, {
+        status: 200,
+        headers: {
+          "Content-Type": "text/plain; charset=utf-8"
+        }
+      });
     } else if (url.pathname === '/') {
       // 如果是访问首页，则返回当前请求的限制信息以及指定内容
       const tokenResponse = await fetch("https://auth.docker.io/token?service=registry.docker.io&scope=repository:ratelimitpreview/test:pull");
